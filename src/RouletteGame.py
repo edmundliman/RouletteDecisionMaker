@@ -5,26 +5,29 @@ class RouletteGame:
 
     Attributes
     ----------
-    global_history : list of str
+    __global_history : list of str
         a list of string holding all rolls that have appeared so far
-    last_fourteen_history : list of str
+    __last_fourteen_history : list of str
         a list of strings holding the last fourteen rolls, newest being last
 
     Methods
     -------
-    get_global_history(self)
-        getter function for global_history
+    add_roll(self, roll)
+        adds the latest roll to both __global_history and __last_fourteen_history
+        removes the oldest roll from __last_fourteen_history
     """
 
-    def __init__(self, global_history):
-        self.global_history = []
-        self.last_fourteen_history = []
+    def __init__(self, initial_game_state):
+        self.__global_history = initial_game_state.copy()
+        self.__last_fourteen_history = initial_game_state.copy()
 
     def get_global_history(self):
-        return self.global_history
+        return self.__global_history
 
-    def __add_roll(self, roll):
-        return 0
+    def get_last_fourteen_history(self):
+        return self.__last_fourteen_history
     
-    def next_roll(roll: str):
-        return 0
+    def add_roll(self, roll):
+        self.__global_history.append(roll)
+        self.__last_fourteen_history.append(roll)
+        self.__last_fourteen_history.pop(0)

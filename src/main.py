@@ -21,3 +21,18 @@ print("**********************************")
 print(initial_game_state)
 
 current_game = RouletteGame.RouletteGame(initial_game_state)
+
+# now we can start the game
+print("\n")
+print("Game has begun! Please enter rolls, enter \"esc\" to end game")
+print("***********************************************************")
+
+roll = input("Enter roll: ")
+while(roll != "esc"):
+    current_game.add_roll(roll)
+    roll = input("Enter roll: ")
+
+print("Game ended, see values below:")
+print("*****************************")
+print(current_game.get_global_history())
+print(current_game.get_last_fourteen_history())
