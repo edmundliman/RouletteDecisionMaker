@@ -14,12 +14,16 @@ class RouletteGame:
 
     Methods
     -------
+    check_roll(self, roll, faces)
+        checks if roll is valid
     add_roll(self, roll)
         adds the latest roll to both __global_history and __last_fourteen_history
         removes the oldest roll from __last_fourteen_history
     classify(self, list_of_classification)
         classifies the current board state based on the list of classification
         returns a list of list of the classification
+    print_prob_table(self, values, title, headers = [])
+        prints the probability table for easy reading
     naive_binomial(self)
         please find below the explanation of this method
     """
@@ -33,6 +37,11 @@ class RouletteGame:
 
     def get_last_fourteen_history(self):
         return self.__last_fourteen_history
+    
+    def check_roll(self, roll, faces):
+        if (roll in faces):
+            return True
+        return False
     
     def add_roll(self, roll):
         self.__global_history.append(roll)
@@ -58,6 +67,19 @@ class RouletteGame:
             return_list_last.append(current_list_last)
 
         return [return_list_global, return_list_last]
+    
+    def print_prob_table(self, values, title, headers = []):
+        
+        for i in range(len(title)):
+            
+            print(title[i])
+            
+            if len(headers) != 0:
+                print(headers)
+            
+            rounded = [round(elem, 5) for elem in values[i]]
+            print(rounded)
+            print("\n")
     
     """
     The naive_binomial method just considers pure binomial probabilities
